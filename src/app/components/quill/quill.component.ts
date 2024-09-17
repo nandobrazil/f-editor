@@ -62,8 +62,4 @@ export default class QuillComponent {
     Quill.register(PageBreakBlot);
   }
 
-  log() {
-    console.log(this.texto);
-  }
-
 }

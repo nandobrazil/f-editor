@@ -13,8 +13,4 @@ export const routes: Routes = [
     path: 'quill',
     loadComponent: () => import('./components/quill/quill.component')
   },
-  {
-    path: 'exemplo',
-    loadComponent: () => import('./components/exemplo/exemplo.component')
-  }
 ];
