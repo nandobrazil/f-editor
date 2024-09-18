@@ -30,6 +30,8 @@
     "ckeditor5": "^43.1.0",
     "highlight.js": "^11.10.0",
     "ngx-quill": "^26.0.8",
+    "parchment": "^3.0.0",
+    "primeflex": "^3.3.1",
     "primeicons": "^7.0.0",
     "primeng": "^17.18.10",
     "quill": "^2.0.2",

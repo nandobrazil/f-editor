@@ -1,0 +1,20 @@
+::ng-deep {
+  .item-active {
+    background-color: var(--primary-color) !important;
+    color: var(--surface-a);
+  }
+  .modal-class {
+    width: 95%;
+  }
+
+  .ql-variable {
+    display: inline-block;
+    padding: 2px 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    min-width: 100px;
+    cursor: pointer;
+  }
+
+}

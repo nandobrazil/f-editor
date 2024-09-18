@@ -1,10 +1,88 @@
+<p-dialog modal [resizable]="false" [draggable]="false" [closable]="false" [(visible)]="visible" position="top"
+          (onHide)="visible = false" styleClass="modal-class">
+  <ng-template pTemplate="header">
+    <p-inputGroup>
+      <input type="text" [(ngModel)]="contentFilter" pInputText placeholder="Pesquisar conteúdo"/>
+      <button type="button" pButton icon="pi pi-sync" pTooltip="Limpar busca"></button>
+    </p-inputGroup>
+  </ng-template>
+  <div class="flex gap-2">
+    <div class="flex flex-column gap-2">
+      <span>Conteúdos</span>
+      <p-scroller
+        [items]="items"
+        [itemSize]="50"
+        styleClass="border-1 surface-border"
+        [style]="{'width': '200px', 'height': '50vh'}">
+        <ng-template pTemplate="item" let-item let-options="options">
+          <div class="flex flex-column align-items-center p-2"
+               (click)="selectContent(item)"
+               [ngClass]="{ 'surface-ground': options.odd, 'item-active': contentSelected?.id === item.id }"
+               style="height: 50px; cursor: pointer">
+            {{ item.name }}
+          </div>
+        </ng-template>
+      </p-scroller>
+    </div>
 
+    <div class="flex flex-column gap-2 w-full">
+      <span>
+        Pré-visualização
+      </span>
+      <div class="w-full h-full">
+        <div class="flex flex-column h-full w-full justify-content-center align-items-center" *ngIf="loading">
+          <p-progressSpinner></p-progressSpinner>
+        </div>
+      </div>
 
-<quill-editor
-  (onEditorCreated)="onEditorInitialized($event)"
-  [(ngModel)]="editorContent"
-  [modules]="editorModules"
-  placeholder=""
-  theme="snow"
-/>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button
+      label="Cancelar"
+      text
+      severity="danger"
+      (onClick)="visible = false"/>
+    <p-button
+      label="Adicionar"
+      outlined
+      severity="primary"
+      (onClick)="addContent()"/>
+  </ng-template>
+</p-dialog>
+
+<p-dialog modal [resizable]="false" [draggable]="false" [closable]="false" [(visible)]="modalVariable" position="top"
+          (onHide)="closeModalVariables()" header="Adicionar variável">
+  <form [formGroup]="form">
+    <div class="grid ui-fluid gap-2">
+      <p-floatLabel class="col-12 mt-5">
+        <input class="w-full" type="text" id="label" pInputText formControlName="label"/>
+        <label for="label">Nome da variável *</label>
+      </p-floatLabel>
+      <p-floatLabel class="col-12">
+        <input class="w-full" type="text" id="description" pInputTextarea formControlName="description"/>
+        <label for="description">Descrição</label>
+      </p-floatLabel>
+      <p-floatLabel class="col-12">
+        <input class="w-full" type="text" id="value" pInputText formControlName="value"/>
+        <label for="value">Valor</label>
+      </p-floatLabel>
+    </div>
+  </form>
+  <ng-template pTemplate="footer">
+    <p-button
+      label="Cancelar"
+      text
+      severity="danger"
+      (onClick)="modalVariable = false"/>
+    <p-button
+      label="Adicionar"
+      outlined
+      severity="primary"
+      (onClick)="addVariable()"/>
+  </ng-template>
+</p-dialog>
+
+<p-editor #editor [modules]="editorModules" [(ngModel)]="value" (ngModelChange)="getSelection()"
+          placeholder="Inicie seu documento..."/>
 
